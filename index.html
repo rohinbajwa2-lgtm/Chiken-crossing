@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chicken Crossing real</title>
+
+<style>
+
+    * {
+
+        box-sizing: border-box;
+
+    }
+
+    body {
+
+        margin: 0;
+
+        font-family: Arial, sans-serif;
+
+        background: #111827;
+
+        color: white;
+
+        text-align: center;
+
+    }
+
+    h1 {
+
+        margin: 20px 0 5px;
+
+    }
+
+    .subtitle {
+
+        color: #9ca3af;
+
+    }
+
+    .game {
+
+        width: 94%;
+
+        max-width: 500px;
+
+        height: 600px;
+
+        margin: 20px auto;
+
+        position: relative;
+
+        overflow: hidden;
+
+        border: 4px solid white;
+
+        border-radius: 18px;
+
+        background: #65a30d;
+
+    }
+
+    .road {
+
+        position: absolute;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 120px;
+
+        background: #374151;
+
+        border-top: 4px dashed white;
+
+        border-bottom: 4px dashed white;
+
+    }
+
+    .road1 { top: 80px; }
+
+    .road2 { top: 240px; }
+
+    .road3 { top: 400px; }
+
+    .finish {
+
+        position: absolute;
+
+        top: 0;
+
+        width: 100%;
+
+        height: 65px;
+
+        background: #22c55e;
+
+        font-size: 25px;
+
+        padding: 15px;
+
+        font-weight: bold;
+
+    }
+
+    #chicken {
+
+        position: absolute;
+
+        bottom: 15px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        font-size: 45px;
+
+        transition: 0.15s;
+
+        z-index: 10;
+
+    }
+
+    .car {
+
+        position: absolute;
+
+        font-size: 40px;
+
+        z-index: 5;
+
+    }
+
+    .car1 {
+
+        top: 120px;
+
+        animation: drive1 4s linear infinite;
+
+    }
+
+    .car2 {
+
+        top: 280px;
+
+        animation: drive2 3s linear infinite;
+
+    }
+
+    .car3 {
+
+        top: 440px;
+
+        animation: drive3 5s linear infinite;
+
+    }
+
+    @keyframes drive1 {
+
+        from { left: -60px; }
+
+        to { left: 100%; }
+
+    }
+
+    @keyframes drive2 {
+
+        from { left: 100%; }
+
+        to { left: -60px; }
+
+    }
+
+    @keyframes drive3 {
+
+        from { left: -60px; }
+
+        to { left: 100%; }
+
+    }
+
+    .panel {
+
+        margin: 10px auto 25px;
+
+        max-width: 500px;
+
+    }
+
+    .coins {
+
+        font-size: 22px;
+
+        margin: 10px;
+
+    }
+
+    button {
+
+        border: none;
+
+        border-radius: 10px;
+
+        padding: 14px 25px;
+
+        margin: 5px;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        background: #2563eb;
+
+        color: white;
+
+    }
+
+    button:active {
+
+        transform: scale(0.95);
+
+    }
+
+    #message {
+
+        min-height: 25px;
+
+        color: #facc15;
+
+        font-weight: bold;
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🐔 Chicken Crossing</h1>
+
+<p class="subtitle">Demo Game — Virtual Coins Only</p>
+
+<div class="coins">
+
+    🪙 Coins: <span id="coins">100</span>
+
+</div>
+
+<div class="game" id="game">
+
+    <div class="finish">🏁 FINISH</div>
+
+    <div class="road road1"></div>
+
+    <div class="road road2"></div>
+
+    <div class="road road3"></div>
+
+    <div class="car car1">🚗</div>
+
+    <div class="car car2">🚙</div>
+
+    <div class="car car3">🚕</div>
+
+    <div id="chicken">🐔</div>
+
+</div>
+
+<div class="panel">
+
+    <button onclick="moveUp()">⬆️ Move</button>
+
+    <button onclick="restart()">🔄 Restart</button>
+
+    <p id="message">Press Move to start!</p>
+
+</div>
+
+<script>
+
+let coins = 100;
+
+let position = 0;
+
+const chicken = document.getElementById("chicken");
+
+const coinText = document.getElementById("coins");
+
+const message = document.getElementById("message");
+
+function moveUp() {
+
+    position += 1;
+
+    if (position >= 5) {
+
+        coins += 20;
+
+        coinText.textContent = coins;
+
+        message.textContent =
+
+            "🎉 You crossed the road! +20 virtual coins";
+
+        position = 0;
+
+        chicken.style.bottom = "15px";
+
+        return;
+
+    }
+
+    let newBottom = 15 + (position * 115);
+
+    chicken.style.bottom = newBottom + "px";
+
+    message.textContent =
+
+        "Keep going! 🐔";
+
+}
+
+function restart() {
+
+    position = 0;
+
+    chicken.style.bottom = "15px";
+
+    message.textContent =
+
+        "Game restarted. Good luck! 🐔";
+
+}
+
+</script>
+
+</body>
+
+</html>
